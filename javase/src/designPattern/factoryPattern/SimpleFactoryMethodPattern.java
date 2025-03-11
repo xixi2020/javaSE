@@ -32,10 +32,10 @@ class SimpleCoffeeStroe{
 class SimpleCoffeeFactory{
 //    public Coffee createCoffee(String type){
 //        Coffee coffee = null;
-//        if("americano".equals(type)){
-//            coffee = new SimpleAmerciaCoffee("美式");
-//        } else if ("latte".equals(type)) {
-//            coffee = new SimpleLatteCoffee("拿铁");
+////        if("americano".equals(type)){
+////            coffee = new SimpleAmerciaCoffee("美式");
+////        } else if ("latte".equals(type)) {
+////            coffee = new SimpleLatteCoffee("拿铁");
 //        }
 //        return coffee;
 //    }

@@ -12,12 +12,9 @@ public class PhilosopherEating {
         Chopsticks c2 = new Chopsticks("c2");
         Chopsticks c3 = new Chopsticks("c3");
 //        Chopsticks c4 = new Chopsticks("c4");
-        Philosopher philosopher01 = new Philosopher(c1,c2);
-        philosopher01.setName("ajmd");
-        Philosopher philosopher02 = new Philosopher(c2,c3);
-        philosopher02.setName("sd");
-        Philosopher philosopher03 = new Philosopher(c3,c1);
-        philosopher03.setName("flyd");
+        Philosopher philosopher01 = new Philosopher(c1,c2,"ajmd");
+        Philosopher philosopher02 = new Philosopher(c2,c3,"lk");
+        Philosopher philosopher03 = new Philosopher(c3,c1,"flyd");
         philosopher01.start();
         philosopher02.start();
         philosopher03.start();
@@ -38,12 +35,6 @@ class Chopsticks extends ReentrantLock {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "chopsticks{" +
-                "name='" + name + '\'' +
-                '}';
-    }
 }
 
 /**
@@ -55,10 +46,13 @@ class Philosopher extends Thread{
     Chopsticks left;
     Chopsticks right;
 
+    String name;
 
-    public Philosopher( Chopsticks left, Chopsticks right) {
+
+    public Philosopher( Chopsticks left, Chopsticks right, String name) {
         this.left = left;
         this.right = right;
+        this.name = name;
     }
 
     @Override
@@ -70,7 +64,7 @@ class Philosopher extends Thread{
                 try {
                     if (right.tryLock()){
                         try {
-                            System.out.println(getName() + "在吃饭");
+                            System.out.println(name + "在吃饭");
                         } finally {
                             right.unlock();
                         }

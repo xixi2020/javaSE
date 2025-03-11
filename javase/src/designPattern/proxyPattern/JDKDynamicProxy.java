@@ -34,7 +34,8 @@ class PorxyStationFactory {
                         stationPoint.getClass().getInterfaces(),
                         //通用处理类：用来调用委托方法：这里就是sell方法
                         (proxy, method, args) -> {
-                            System.out.println("正在抢座：" );
+                            //增强的方法
+                            System.out.println("代理成功，正在抢座：" );
                             //通过反射得到具体处理的方法
                             Object o = method.invoke(stationPoint, args);
                             return o;

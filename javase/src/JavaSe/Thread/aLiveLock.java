@@ -15,30 +15,30 @@ public class ALiveLock {
             synchronized (resource01){
 
                 try {
-                    System.out.println("线程1获取了资源1");
+                    System.out.println(Thread.currentThread().getName() + "获取了资源1");
                     Thread.sleep(2000);
                     synchronized (resource02){
-                        System.out.println("线程1获取了资源2");
+                        System.out.println(Thread.currentThread().getName() + "获取了资源2");
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
-        })).start();
+        }),"t1").start();
 
         new Thread(new Thread(() -> {
             synchronized (resource01){
 
                 try {
-                    System.out.println("线程2获取了资源1");
+                    System.out.println(Thread.currentThread().getName() + "获取了资源1");
                     Thread.sleep(2000);
                     synchronized (resource02){
-                        System.out.println("线程2获取了资源2");
+                        System.out.println(Thread.currentThread().getName() + "获取了资源2");
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
-        })).start();
+        }),"t2").start();
     }
 }

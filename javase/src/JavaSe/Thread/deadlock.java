@@ -30,6 +30,26 @@ public class DeadLock {
                 }
             }
         };
+        //匿名内部类和lambda的方式去启动线程:这里是接受runnable任务
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 线程2：占用资源2 ，请求资源1
+                synchronized (resource02) {
+
+                    try {
+                        System.out.println("线程2已经占用了资源2，开始请求资源1");
+                        Thread.sleep(2000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    synchronized (resource01) {
+                        System.out.println("线程2已经占用了资源1");
+                    }
+                }
+            }
+        }).start();
+        //这里都是继承thread的方式
         Thread t2 = new Thread("t2"){
             public void run() {
                 synchronized (resource02){
@@ -49,18 +69,6 @@ public class DeadLock {
         t2.start();
     }
 
-    //匿名内部类和lambda的方式去启动线程
-    //        new Thread(() -> {
-//            // 线程2：占用资源2 ，请求资源1
-//            synchronized (resources2) {
-//                System.out.println("线程2已经占用了资源2，开始请求资源1");
-//                Thread.sleep(2000);
-//                synchronized (resources1) {
-//                    System.out.println("线程2已经占用了资源1");
-//                }
-//            }
-//        }
-//    }).start();
 
 
 
